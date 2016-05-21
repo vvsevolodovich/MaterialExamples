@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:a="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        a:layout_width="match_parent"
+        a:layout_height="match_parent"
+        a:paddingLeft="@dimen/activity_horizontal_margin"
+        a:paddingRight="@dimen/activity_horizontal_margin"
+        a:paddingTop="@dimen/activity_vertical_margin"
+        a:paddingBottom="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/activity_main"
+        tools:context="com.vivanov.material.materialexample.MainActivity">
+
+    <TextView
+            a:text="Hello World!"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"/>
+</RelativeLayout>
