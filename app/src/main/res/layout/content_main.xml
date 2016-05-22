@@ -13,8 +13,11 @@
         tools:showIn="@layout/activity_main"
         tools:context="com.vivanov.material.materialexample.MainActivity">
 
-    <TextView
-            a:text="Hello World!"
+    <android.support.v7.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button"
+            a:id="@+id/button"
+            a:text="@string/cards"
             a:layout_width="wrap_content"
             a:layout_height="wrap_content"/>
+
 </RelativeLayout>

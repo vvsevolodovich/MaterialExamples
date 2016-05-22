@@ -20,6 +20,8 @@
         </activity>
 
         <activity android:name=".SecondActivity"/>
+        <activity android:name=".CardsActivity" android:theme="@style/LeavingActivity"/>
+        <activity android:name=".ChatActivity" android:theme="@style/EnteringActivity"/>
     </application>
 
 </manifest>

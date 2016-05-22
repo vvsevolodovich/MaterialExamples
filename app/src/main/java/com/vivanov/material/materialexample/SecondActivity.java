@@ -22,8 +22,6 @@ public class SecondActivity extends FragmentActivity {
 
 	private static final long TIME_OPEN_ANIMATION = 300;
 
-	private ImageView mAnimation;
-
 	public static void openAnimated(final Activity fromActivity, final View original, int colorId) {
 		final ViewGroup container = (ViewGroup) fromActivity.findViewById(android.R.id.content);
 
@@ -56,15 +54,15 @@ public class SecondActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.second_activity);
 
-		mAnimation = (ImageView) findViewById(R.id.second_activity_space_animation);
+		final ImageView animation = (ImageView) findViewById(R.id.second_activity_space_animation);
 
 		final Point size = new Point();
 		getWindowManager().getDefaultDisplay().getSize(size);
 		int height = size.y;
-		ObjectAnimator scaleAnimatorY = ObjectAnimator.ofFloat(mAnimation, "y", 0.0f, -height);
+		ObjectAnimator scaleAnimatorY = ObjectAnimator.ofFloat(animation, "y", 0.0f, -height);
 		scaleAnimatorY.setDuration(TIME_OPEN_ANIMATION);
 
-		ValueAnimator animColor = ObjectAnimator.ofInt(mAnimation, "backgroundColor",
+		ValueAnimator animColor = ObjectAnimator.ofInt(animation, "backgroundColor",
 				getResources().getColor(R.color.colorAccent),
 				getResources().getColor(R.color.colorPrimary));
 		animColor.setDuration(TIME_OPEN_ANIMATION);
