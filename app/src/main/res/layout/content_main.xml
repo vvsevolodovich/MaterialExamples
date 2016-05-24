@@ -13,11 +13,31 @@
         tools:showIn="@layout/activity_main"
         tools:context="com.vivanov.material.materialexample.MainActivity">
 
+    <com.vivanov.material.materialexample.views.RippleView
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:padding="0dp"
+            a:id="@+id/button_ripple">
+
+        <android.support.v7.widget.AppCompatButton
+                style="@style/Widget.AppCompat.Button"
+                a:id="@+id/button"
+                a:padding="0dp"
+                a:text="@string/cards"
+                a:layout_margin="@dimen/activity_horizontal_margin"
+                a:layout_width="match_parent"
+                a:layout_height="wrap_content"/>
+
+    </com.vivanov.material.materialexample.views.RippleView>
+
     <android.support.v7.widget.AppCompatButton
             style="@style/Widget.AppCompat.Button"
-            a:id="@+id/button"
-            a:text="@string/cards"
-            a:layout_width="wrap_content"
+            a:layout_below="@id/button_ripple"
+            a:id="@+id/motions_button"
+            a:padding="0dp"
+            a:text="@string/motions"
+            a:layout_margin="@dimen/activity_horizontal_margin"
+            a:layout_width="match_parent"
             a:layout_height="wrap_content"/>
 
 </RelativeLayout>

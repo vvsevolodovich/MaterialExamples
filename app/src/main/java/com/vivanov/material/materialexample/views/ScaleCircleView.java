@@ -8,7 +8,7 @@ import android.view.View;
 
 public class ScaleCircleView extends View {
 
-    private static final long DURATION = 300;
+    private static final long DURATION = 150;
 
     private long startTime = 0;
     private int size = 0;

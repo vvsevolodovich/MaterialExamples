@@ -6,7 +6,8 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import com.vivanov.material.materialexample.views.RippleView;
+import com.vivanov.material.materialexample.views.RippleView.OnRippleCompleteListener;
 
 public class MainActivity extends FragmentActivity {
 
@@ -20,14 +21,23 @@ public class MainActivity extends FragmentActivity {
 			@Override
 			public void onClick(View v) {
 				Log.d("TAG", "Test");
+				SecondActivity.openAnimated(MainActivity.this, v, R.color.colorAccent);
 			}
 		});
 
-		final Button button = (Button) findViewById(R.id.button);
-		button.setOnClickListener(new OnClickListener() {
+		final RippleView button = (RippleView) findViewById(R.id.button_ripple);
+		button.setOnRippleCompleteListener(new OnRippleCompleteListener() {
+			@Override
+			public void onComplete(RippleView rippleView) {
+				CardsActivity.show(MainActivity.this);
+			}
+		});
+
+		final View motions = findViewById(R.id.motions_button);
+		motions.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				CardsActivity.show(MainActivity.this);
+				MotionsActivity.open(MainActivity.this);
 			}
 		});
 	}
