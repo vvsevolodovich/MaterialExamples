@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
-              a:orientation="vertical"
-              a:layout_width="match_parent"
-              a:layout_height="match_parent">
+                a:orientation="vertical"
+                a:layout_width="match_parent"
+                a:layout_height="match_parent">
 
 
     <com.vivanov.material.materialexample.views.RippleView
@@ -10,11 +10,17 @@
             a:layout_width="wrap_content"
             a:layout_height="wrap_content">
 
-        <ImageView
-                a:id="@+id/motion_rectangle"
-                a:src="@color/colorAccent"
-                a:layout_width="100dp"
-                a:layout_height="100dp"/>
+        <android.support.v7.widget.CardView
+                a:layout_width="wrap_content"
+                a:layout_height="wrap_content">
+
+            <ImageView
+                    a:id="@+id/motion_rectangle"
+                    a:src="@color/colorAccent"
+                    a:layout_width="100dp"
+                    a:layout_height="100dp"/>
+        </android.support.v7.widget.CardView>
+
 
     </com.vivanov.material.materialexample.views.RippleView>
 

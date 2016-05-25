@@ -11,12 +11,10 @@ import android.view.View;
 import com.vivanov.material.materialexample.views.RippleView;
 import com.vivanov.material.materialexample.views.RippleView.OnRippleCompleteListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MotionsActivity extends FragmentActivity {
 
-	private List<ObjectAnimator> mAnimators = new ArrayList<>();
+	private static final int DURATION = 500;
+	private AnimatorFactory mAnimatorFactory;
 
 	private int currentAnimator = -1;
 
@@ -26,7 +24,7 @@ public class MotionsActivity extends FragmentActivity {
 		setContentView(R.layout.activity_motions);
 
 		final RippleView view = (RippleView) findViewById(R.id.motion_rectangle_ripple);
-		createAnimators(view);
+		mAnimatorFactory = new AnimatorFactory(getResources().getDisplayMetrics());
 		view.setOnRippleCompleteListener(new OnRippleCompleteListener() {
 			@Override
 			public void onComplete(RippleView rippleView) {
@@ -35,7 +33,7 @@ public class MotionsActivity extends FragmentActivity {
 				} else {
 					currentAnimator++;
 				}
-				mAnimators.get(currentAnimator).start();
+				mAnimatorFactory.create(currentAnimator, view).start();
 			}
 		});
 	}
@@ -44,42 +42,53 @@ public class MotionsActivity extends FragmentActivity {
 		mainActivity.startActivity(new Intent(mainActivity, MotionsActivity.class));
 	}
 
-	private void createAnimators(View view) {
+	private class AnimatorFactory {
 
-		final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+		private DisplayMetrics dm;
 
-		final ObjectAnimator y = topBottom(view, displayMetrics);
+		public AnimatorFactory(DisplayMetrics dm) {
+			this.dm = dm;
+		}
 
-		mAnimators.add(topBottom(view, displayMetrics));
-		mAnimators.add(leftRight(view, displayMetrics));
-		mAnimators.add(bottomTop(view, displayMetrics));
-		mAnimators.add(rightLeft(view, displayMetrics));
+		ObjectAnimator create(int step, View view) {
+			switch (step) {
+				case 0:
+					return topBottom(view, dm);
+				case 1:
+					return leftRight(view, dm);
+				case 2:
+					return bottomTop(view, dm);
+				case 3:
+					return rightLeft(view, dm);
+			}
+			return null;
+		}
 	}
 
 	private ObjectAnimator topBottom(View view, DisplayMetrics displayMetrics) {
-		final ObjectAnimator topBottom = ObjectAnimator.ofFloat(view, "y", view.getY(), displayMetrics.heightPixels - 100)
-				.setDuration(200);
+		final ObjectAnimator topBottom = ObjectAnimator.ofFloat(view, "y", view.getY(), displayMetrics.heightPixels - view.getHeight())
+				.setDuration(DURATION);
 		topBottom.setInterpolator(new FastOutSlowInInterpolator());
 		return topBottom;
 	}
 
 	private ObjectAnimator leftRight(View view, DisplayMetrics displayMetrics) {
-		final ObjectAnimator leftRight = ObjectAnimator.ofFloat(view, "x", view.getX(), displayMetrics.widthPixels - 100)
-				.setDuration(200);
+		final ObjectAnimator leftRight = ObjectAnimator.ofFloat(view, "x", view.getX(), displayMetrics.widthPixels - view.getWidth())
+				.setDuration(DURATION);
 		leftRight.setInterpolator(new FastOutSlowInInterpolator());
 		return leftRight;
 	}
 
 	private ObjectAnimator bottomTop(View view, DisplayMetrics displayMetrics) {
 		final ObjectAnimator bottomTop = ObjectAnimator.ofFloat(view, "y", view.getY(), 0)
-				.setDuration(200);
+				.setDuration(DURATION);
 		bottomTop.setInterpolator(new FastOutSlowInInterpolator());
 		return bottomTop;
 	}
 
 	private ObjectAnimator rightLeft(View view, DisplayMetrics displayMetrics) {
 		final ObjectAnimator rightLeft = ObjectAnimator.ofFloat(view, "x", view.getX(), 0)
-				.setDuration(200);
+				.setDuration(DURATION);
 		rightLeft.setInterpolator(new FastOutSlowInInterpolator());
 		return rightLeft;
 	}
