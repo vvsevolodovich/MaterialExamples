@@ -31,6 +31,11 @@ public class MainActivity extends FragmentActivity {
 			public void onComplete(RippleView rippleView) {
 				CardsActivity.show(MainActivity.this);
 			}
+
+			@Override
+			public void onCompleteDoubleTap(RippleView rippleView) {
+
+			}
 		});
 
 		final View motions = findViewById(R.id.motions_button);

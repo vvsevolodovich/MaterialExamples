@@ -30,6 +30,7 @@ public class RippleView extends RelativeLayout {
     private Handler canvasHandler;
     private float radiusMax = 0;
     private boolean animationRunning = false;
+    private boolean doubleTabReceived = false;
     private int timer = 0;
     private int timerEmpty = 0;
     private int durationEmpty = -1;
@@ -115,6 +116,15 @@ public class RippleView extends RelativeLayout {
             public boolean onSingleTapUp(MotionEvent e) {
                 return true;
             }
+
+            @Override
+            public boolean onDoubleTap(MotionEvent event) {
+                super.onDoubleTap(event);
+                doubleTabReceived = true;
+                animateRipple(event);
+                sendClickEvent(true);
+                return true;
+            }
         });
 
         this.setDrawingCacheEnabled(true);
@@ -133,7 +143,12 @@ public class RippleView extends RelativeLayout {
                 timerEmpty = 0;
                 canvas.restore();
                 invalidate();
-                if (onCompletionListener != null) onCompletionListener.onComplete(this);
+                if (doubleTabReceived) {
+                    doubleTabReceived = false;
+                    if (onCompletionListener != null) onCompletionListener.onCompleteDoubleTap(this);
+                } else {
+                    if (onCompletionListener != null) onCompletionListener.onComplete(this);
+                }
                 return;
             } else
                 canvasHandler.postDelayed(runnable, frameRate);
@@ -317,5 +332,6 @@ public class RippleView extends RelativeLayout {
      */
     public interface OnRippleCompleteListener {
         void onComplete(RippleView rippleView);
+        void onCompleteDoubleTap(RippleView rippleView);
     }
 }
