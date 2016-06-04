@@ -1,5 +1,7 @@
 package com.vivanov.material.materialexample;
 
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -16,6 +18,8 @@ public class ChatActivity extends FragmentActivity {
 		setContentView(R.layout.activity_chat);
 
 		mImageView = (ImageView) findViewById(R.id.card_avatar);
-		mImageView.setTransitionName(getString(R.string.transition_chat_avatar));
+		if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+			mImageView.setTransitionName(getString(R.string.transition_chat_avatar));
+		}
 	}
 }

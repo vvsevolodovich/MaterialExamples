@@ -3,6 +3,9 @@ package com.vivanov.material.materialexample;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -60,10 +63,15 @@ public class CardsActivity extends FragmentActivity {
 					final TextView label = cardViewHolder.mLabel;
 
 					final Intent intent = new Intent(mActivity, ChatActivity.class);
-					Pair avatarPair = new Pair<View, String>(imageView, context.getResources().getString(R.string.transition_chat_avatar));
-					Pair namePair = new Pair<View, String>(label, context.getResources().getString(R.string.transition_chat_name));
-					ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, avatarPair, namePair);
-					ActivityCompat.startActivity(mActivity, intent, optionsCompat.toBundle());
+					if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+						Pair avatarPair = new Pair<View, String>(imageView, context.getResources().getString(R.string.transition_chat_avatar));
+						Pair namePair = new Pair<View, String>(label, context.getResources().getString(R.string.transition_chat_name));
+
+						ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, avatarPair, namePair);
+						ActivityCompat.startActivity(mActivity, intent, optionsCompat.toBundle());
+					} else {
+						mActivity.startActivity(intent);
+					}
 				}
 			});
 

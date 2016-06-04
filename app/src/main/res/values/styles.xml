@@ -15,7 +15,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="LeavingActivity" parent="AppTheme">
-        <item name="android:windowExitTransition">@android:transition/slide_left</item>
+        <item name="android:windowExitTransition">@android:transition/slide_right</item>
     </style>
     <style name="EnteringActivity" parent="AppTheme">
         <item name="android:windowEnterTransition">@android:transition/fade</item>

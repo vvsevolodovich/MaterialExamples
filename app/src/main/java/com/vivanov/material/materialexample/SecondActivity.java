@@ -20,7 +20,7 @@ import com.vivanov.material.materialexample.views.ScaleCircleView;
 
 public class SecondActivity extends FragmentActivity {
 
-	private static final long TIME_OPEN_ANIMATION = 150;
+	private static final long TIME_OPEN_ANIMATION = 1000;
 
 	public static void openAnimated(final Activity fromActivity, final View original, int colorId) {
 		final ViewGroup container = (ViewGroup) fromActivity.findViewById(android.R.id.content);
